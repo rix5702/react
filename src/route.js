@@ -1,10 +1,10 @@
-import { Navigate, Outlet, createBrowserRouter } from "react-router-dom";
+import { Navigate, Outlet, createBrowserRouter,Route } from "react-router-dom";
 import Layout from "./components/layouts/layout";
-
 import ListUser from "./components/User/ListUser"
 import Login from "./components/User/Login";
 import Home from "./Home";
-import Admin from "./Admin"
+import Admin from "./Admin";
+
 
 const router = createBrowserRouter([
     {
@@ -30,6 +30,7 @@ const router = createBrowserRouter([
                     <Layout>
                         <ListUser />
                     </Layout>,
+               
             },
             {
                 path: '/login',
