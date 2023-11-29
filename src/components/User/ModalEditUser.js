@@ -1,12 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import UserService from "../../services/UserService";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-const ModalAddNew=(props) =>{
-    const { show, handleClose,handleUpdateUser} = props;
-
+const ModalEditUser=(props) =>{
+    const { show, handleClose,dataUserEdit} = props;
+    const [stt, setstt]= useState("");
     const [fullname, setfullname]= useState("");
     const [username, setusername]= useState("");
     const [email, setemail]= useState("");
@@ -14,26 +14,29 @@ const ModalAddNew=(props) =>{
     const [sex, setsex]= useState("");
     const [address, setaddress]= useState("");
     const [groupid, setgroupid]= useState("");
-    const handleAddUser = async() => {
-        let res = await UserService.NewUser(username,password,fullname,address,sex,email,groupid)
-        console.log(">>>chech res:", res)
-        if(res && res.message == "thêm người dùng mới thành công"){
-          //thanh cong
-          handleClose();
-          setfullname('');
-          setusername('');
-          setemail('');
-          setpassword('');
-          setsex('');
-          setaddress('');
-          setgroupid('');
-          toast.success('Thêm người dùng mới thành công');
-          handleUpdateUser({fullname:fullname, id:res.stt})
-        }else{
-          //that bai
-          toast.error("that bai");
-        }
+    const handleEditUser= async () => {
+       let res = await UserService.updateUser(username,password,fullname,address,sex,email,groupid,stt)
+       console.log(res.message)
+       if(res && res.message ==="cập nhật người dùng  thành công"){
+        handleClose();
+        toast.success("cập nhật người dùng  thành công");
+       }else{
+        toast.error("that bai");
+       }
+        //thanh cong
     }
+    useEffect(()=>{
+        if (show) {
+            setstt(dataUserEdit.stt)
+            setfullname(dataUserEdit.fullname)
+            setusername(dataUserEdit.username)
+            setemail(dataUserEdit.email)
+            setpassword(dataUserEdit.password)
+            setsex(dataUserEdit.sex)
+            setaddress(dataUserEdit.address)
+            setgroupid(dataUserEdit.groupid)
+        }
+    },[dataUserEdit])
     return(
         <>
          <Modal
@@ -43,7 +46,7 @@ const ModalAddNew=(props) =>{
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Add New User</Modal.Title>
+          <Modal.Title>Edit A User</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className='body'>
@@ -93,7 +96,9 @@ const ModalAddNew=(props) =>{
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={()=> handleAddUser()}>Add</Button>
+          <Button variant="primary" onClick={()=> handleEditUser()}>
+            Confirm
+            </Button>
         </Modal.Footer>
       </Modal>
         
@@ -114,4 +119,4 @@ const ModalAddNew=(props) =>{
     )
 
 }
-export default ModalAddNew;
+export default ModalEditUser;

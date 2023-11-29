@@ -3,12 +3,12 @@ import { AppContext } from '../context/AppProvider';
 import UserService from '../../services/UserService'
 import { useNavigate } from 'react-router-dom'
 
-export default function Login() {
+export default function Login()  {
     const [username, setUserName] = useState('');
     const [password, setpassword] = useState('');
     const [error, setError] = useState('');
-    const { loginContext } = useContext(AppContext)
-    // const navigate = useNavigate();
+    const { loginContext } = useContext(AppContext);
+    const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -16,15 +16,15 @@ export default function Login() {
             console.log(res)
             loginContext(res.data);
             console.log('tt',res.data)
-            // if(res.data.role === '1'){
-            //    navigate('/list-user');
-            // }else{ navigate('/')}
+            if(res.data.role === 1 ){
+               navigate('/list-user');
+            }else{ navigate('/')}
             
         } catch (error) {
             console.error('Lỗi từ server:', error.response.data.message);
             setError(error.response.data.message)
         }
-    }
+    };
     return (
         <>
             <div className="form-outline mb-4">
@@ -37,7 +37,7 @@ export default function Login() {
                         setUserName(e.target.value)
                     }
                 />
-                <label className="form-label" for="form2Example17"
+                <label className="form-label" 
                 >Tài khoản</label
                 >
             </div>
@@ -52,7 +52,7 @@ export default function Login() {
                         setpassword(e.target.value)
                     }
                 />
-                <label className="form-label" for="form2Example27"
+                <label className="form-label" 
                 >Mật khẩu</label
                 >
             </div>

@@ -3,7 +3,8 @@ import Layout from "./components/layouts/layout";
 
 import ListUser from "./components/User/ListUser"
 import Login from "./components/User/Login";
-import Home from "./components/Home";
+import Home from "./Home";
+import Admin from "./Admin"
 
 const router = createBrowserRouter([
     {
@@ -14,7 +15,16 @@ const router = createBrowserRouter([
                     <Layout>
                         <Home/>
                     </Layout>,
-            }, {
+            }, 
+            {
+                path: '/admin',
+                element:
+                    <Layout>
+                        <Admin/>
+                    </Layout>,
+            },
+            
+            {
                 path: '/list-user',
                 element:
                     <Layout>

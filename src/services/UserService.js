@@ -12,9 +12,18 @@ const Login = (username,password) =>{
 const Logout = () =>{
     return axios.get('/logout')
 }
+
+const updateUser = (username,password,fullname,address,sex,email,groupid,stt) =>{
+    return axios.post('/update-user',{username,password,fullname,address,sex,email,groupid,stt})
+}
+const deleteUser= (stt) =>{
+    return axios.delete(`/delete-user/${stt}`)
+}
 export default { 
     fetchAllUser,
     NewUser,
     Login,
-    Logout
+    Logout,
+    updateUser,
+    deleteUser
 };

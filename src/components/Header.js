@@ -28,7 +28,7 @@ const Header = (props) => {
                             <NavDropdown.Item href="/login">
                                 Login
                             </NavDropdown.Item>
-                            <NavDropdown.Item onClick={logoutContext}>
+                            <NavDropdown.Item  href="/" onClick={logoutContext}>
                                 Logout
                             </NavDropdown.Item>
 
