@@ -16,7 +16,7 @@ export default function Login() {
             console.log(res)
             loginContext(res.data);
             console.log('tt',res.data)
-            // if(res.data.role === 'admin'){
+            // if(res.data.role === '1'){
             //    navigate('/list-user');
             // }else{ navigate('/')}
             

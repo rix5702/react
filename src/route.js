@@ -3,6 +3,7 @@ import Layout from "./components/layouts/layout";
 
 import ListUser from "./components/User/ListUser"
 import Login from "./components/User/Login";
+import Home from "./components/Home";
 
 const router = createBrowserRouter([
     {
@@ -11,7 +12,7 @@ const router = createBrowserRouter([
                 path: '/',
                 element:
                     <Layout>
-                        
+                        <Home/>
                     </Layout>,
             }, {
                 path: '/list-user',
