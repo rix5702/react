@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import {NewUser} from "../../services/UserService";
+import UserService from "../../services/UserService";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const ModalAddNew=(props) =>{
     const { show, handleClose} = props;
 
@@ -13,9 +15,9 @@ const ModalAddNew=(props) =>{
     const [address, setaddress]= useState("");
     const [groupid, setgroupid]= useState("");
     const handleAddUser = async() => {
-        let res = await NewUser(username,password,fullname,address,sex,email,groupid)
+        let res = await UserService.NewUser(username,password,fullname,address,sex,email,groupid)
         console.log(">>>chech res:", res)
-        if(res && res.message =="thêm người dùng mới thành công"){
+        if(res && res.message == "thêm người dùng mới thành công"){
           //thanh cong
           handleClose();
           setfullname('');
@@ -25,6 +27,7 @@ const ModalAddNew=(props) =>{
           setsex('');
           setaddress('');
           setgroupid('');
+          toast.success('Thêm người dùng mới thành công');
           
         }else{
           //that bai
@@ -93,6 +96,18 @@ const ModalAddNew=(props) =>{
         </Modal.Footer>
       </Modal>
         
+          <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+          />
         </>
 
     )
