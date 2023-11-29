@@ -6,6 +6,7 @@ import ListUser from './components/User/ListUser';
 import Container from 'react-bootstrap/Container';
 import ModalAddNew from './components/User/ModalAddUser';
 import { useState } from 'react';
+import Footer from './components/Footer';
 function App() {
   const [isShowModalAddNew, setisShowModalAddNew] = useState(false);
   const handleClose =() =>{
@@ -25,8 +26,11 @@ function App() {
       <ModalAddNew
       show={isShowModalAddNew}
       handleClose= {handleClose}
+      
       />
+      <Footer/>
     </div>
+    
   );
 }
 

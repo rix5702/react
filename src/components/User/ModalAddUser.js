@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import {NewUser} from "../../services/UserService";
 const ModalAddNew=(props) =>{
-    const { show, handleClose} = props
+    const { show, handleClose} = props;
 
     const [fullname, setfullname]= useState("");
     const [username, setusername]= useState("");
@@ -11,8 +12,23 @@ const ModalAddNew=(props) =>{
     const [sex, setsex]= useState("");
     const [address, setaddress]= useState("");
     const [groupid, setgroupid]= useState("");
-    const handleAddUser =() => {
-        console.log(">>>chech state:", "fullname",fullname)
+    const handleAddUser = async() => {
+        let res = await NewUser(username,password,fullname,address,sex,email,groupid)
+        console.log(">>>chech res:", res)
+        if(res && res.message =="thêm người dùng mới thành công"){
+          //thanh cong
+          handleClose();
+          setfullname('');
+          setusername('');
+          setemail('');
+          setpassword('');
+          setsex('');
+          setaddress('');
+          setgroupid('');
+          
+        }else{
+          //that bai
+        }
     }
     return(
         <>
